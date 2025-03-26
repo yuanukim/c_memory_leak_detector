@@ -156,12 +156,12 @@ void mem_detect_print_leak(void) {
     HashSet* hs = hash_set_create();
     MemNode* cursor = memList.head->next;
     
-    printf("\nmemory leak detection finish.\n");
+    printf("\nmemory leak trace finish.\n");
     
     while (cursor != memList.tail) {
         if (hash_set_find(hs, cursor->line) == NULL) {
             hash_set_add(hs, cursor->line);
-            printf("[LINE]: %d, [FILE]: %s, [FUNC_NAME]: %s, leak.\n", cursor->line, cursor->fileName, cursor->functionName);
+            printf("leak found: [FILE]: %s, [LINE]: %d, [FUNC_NAME]: %s.\n", cursor->fileName, cursor->line, cursor->functionName);
         }
         
         totalLeak += cursor->size;
