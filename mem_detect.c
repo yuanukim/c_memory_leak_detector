@@ -35,7 +35,7 @@ typedef struct HashSet {
 
 static MemList memList;
 
-HashSet* hash_set_create(void) {
+static HashSet* hash_set_create(void) {
     HashSet* hs = (HashSet*)malloc(sizeof(HashSet));
     
     for (size_t i = 0; i < HASH_SET_BUCKET_SIZE; ++i) {
@@ -45,7 +45,7 @@ HashSet* hash_set_create(void) {
     return hs;
 }
 
-void hash_set_destroy(HashSet* hs) {
+static void hash_set_destroy(HashSet* hs) {
     if (hs) {
         HashNode* cursor;
         HashNode* temp;
@@ -64,11 +64,11 @@ void hash_set_destroy(HashSet* hs) {
     }
 }
 
-int hash(int key) {
+static int hash(int key) {
     return key % HASH_SET_BUCKET_SIZE;
 }
 
-HashNode* hash_set_find(HashSet* hs, int key) {
+static HashNode* hash_set_find(HashSet* hs, int key) {
     int hashval = hash(key);
     HashNode* node = hs->bucket[hashval];
     
@@ -84,7 +84,7 @@ HashNode* hash_set_find(HashSet* hs, int key) {
     return NULL;
 }
 
-void hash_set_add(HashSet* hs, int key) {
+static void hash_set_add(HashSet* hs, int key) {
     HashNode* node = hash_set_find(hs, key);
     
     if (node != NULL) {
