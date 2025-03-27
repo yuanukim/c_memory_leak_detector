@@ -9,22 +9,6 @@
 
 #include <stddef.h>
 
-typedef struct MemNode {
-    size_t size;
-    
-    int line;
-    const char* functionName;
-    const char* fileName;
-    
-    struct MemNode* prev;
-    struct MemNode* next;
-} MemNode;
-
-typedef struct MemList {
-    MemNode* head;
-    MemNode* tail;
-} MemList;
-
 /*
     initialize the memory detector.
 */
