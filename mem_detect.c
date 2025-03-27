@@ -8,6 +8,22 @@
 
 #define HASH_SET_BUCKET_SIZE  101
 
+typedef struct MemNode {
+    size_t size;
+    
+    int line;
+    const char* functionName;
+    const char* fileName;
+    
+    struct MemNode* prev;
+    struct MemNode* next;
+} MemNode;
+
+typedef struct MemList {
+    MemNode* head;
+    MemNode* tail;
+} MemList;
+
 typedef struct HashNode {
     int line;
     struct HashNode* next;
@@ -156,7 +172,7 @@ void mem_detect_print_leak(void) {
     HashSet* hs = hash_set_create();
     MemNode* cursor = memList.head->next;
     
-    printf("\nmemory leak trace finish.\n");
+    printf("\nmemory leak detection finish.\n");
     
     while (cursor != memList.tail) {
         if (hash_set_find(hs, cursor->line) == NULL) {
